@@ -1,19 +1,16 @@
 from sys import argv, exit
 from PyQt5.QtGui import QPainter, QColor
 from random import randint
-from PyQt5 import uic
+from ui import Ui_MainWindow
 from PyQt5.QtWidgets import QApplication, QMainWindow
 
 
-class Main(QMainWindow):
+class Main(Ui_MainWindow, QMainWindow):
     def __init__(self):
         super().__init__()
-        uic.loadUi('UI.ui', self)
+        self.setupUi(self)
         self.pushButton.clicked.connect(self.clicled)
-        self.x = -1
-        self.y = -1
         self.k = 0
-        self.setMouseTracking(True)
 
     def clicled(self):
         self.k = 1
@@ -27,7 +24,7 @@ class Main(QMainWindow):
 
     def drawing(self, qp):
         if self.k:
-            qp.setBrush(QColor("yellow"))
+            qp.setBrush(QColor(randint(0, 255), randint(0, 255), randint(0, 255)))
             r = randint(0, 450)
             qp.drawEllipse(randint(0, 500 - r), randint(0, 500 - r), r, r)
 
